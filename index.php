@@ -9,32 +9,21 @@
         require 'auxiliar.php';
 
         const OP = ['+','-','*','/'];
-        const PAR = ['op', 'op1', 'op2'];
-
-        function selected ($op1, $op2)
-        {
-            return $op1 == $op2 ? "selected" : "";
-        }
+        const PAR = ['op' => '+', 'op1' => '0', 'op2' => '0'];
 
         $op1 = $op2 = $op = null;
         $error = [];
 
         // Comprobación de parámetros:
-        $par = array_keys($_GET);
-        sort($par);
-        if (empty($_GET)) {
-            $op1 = '0';
-            $op2 = '0';
-            $op = '+';
-        } elseif ($par == PAR) {
-            $op1 = trim($_GET['op1']);
-            $op2 = trim($_GET['op2']);
-            $op = trim($_GET['op']);
-        } else {
-            $error = "Los parámetros recibidos no son los correctos.";
-        }
 
-        $res = '';
+        if (empty($_GET)) {
+            extract(PAR);
+        } elseif (empty(array_diff_key($_GET, PAR)) &&
+                  empty(array_diff_key(PAR, $_GET))) {
+            extract(array_map('trim', $_GET), EXTR_IF_EXISTS);
+        } else {
+            $error[] = "Los parámetros recibidos no son los correctos.";
+        }
 
         if (empty($error)){
             // Comprobación de valores:
@@ -48,6 +37,7 @@
                 $error[] = "El operador no es válido.";
             }
         }
+        
         formulario($op1, $op2, $op, OP);
 
         if (empty($error)): ?>
