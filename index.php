@@ -50,24 +50,8 @@
         }
         formulario($op1, $op2, $op, OP);
 
-        if (empty($error)):
-            $res = '';
-            switch($op) {
-                case '+':
-                    $res = $op1+$op2;
-                    break;
-                case '-':
-                    $res = $op1-$op2;
-                    break;
-                case '*':
-                    $res = $op1*$op2;
-                    break;
-                case '/':
-                    $res = $op1/$op2;
-                    break;
-            }
-            ?>
-            <h3>Resultado: <?= $res ?></h3>
+        if (empty($error)): ?>
+            <h3>Resultado: <?= calcula($op1, $op2, $op)?></h3>
         <?php else: ?>
             <?php foreach ($error as $err): ?>
                 <h3>Error: <?= $err ?></h3>

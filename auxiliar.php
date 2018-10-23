@@ -18,3 +18,21 @@
     </form>
 <?php
 }
+
+function calcula($op1, $op2, $op) {
+    switch($op) {
+        case '+':
+            $res = $op1+$op2;
+            break;
+        case '-':
+            $res = $op1-$op2;
+            break;
+        case '*':
+            $res = $op1*$op2;
+            break;
+        case '/':
+            $res = $op1/$op2;
+            break;
+    }
+    return $res;
+}
