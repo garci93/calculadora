@@ -7,22 +7,16 @@
     <body>
         <?php
         require 'auxiliar.php';
-
-        const OP = ['+','-','*','/'];
+        const OP = ['+', '-', '*', '/'];
         const PAR = ['op' => '+', 'op1' => '0', 'op2' => '0'];
-
         $error = [];
-
-        // Comprobación de parámetros
+        // Comprobación de parámetros:
         extract(compruebaParametros(PAR, $error));
-
-        if (empty($error)){
-            // Comprobación de valores:
+        // Comprobación de valores:
+        if (empty($error)) {
             compruebaValores($op1, $op2, $op, OP, $error);
         }
-
         formulario($op1, $op2, $op, OP);
-
         if (empty($error)) {
             mostrarResultado($op1, $op2, $op);
         } else {
