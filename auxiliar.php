@@ -1,4 +1,11 @@
 <?php
+
+function compruebaErrores($error) {
+    if (!empty($error)) {
+        throw new Exception;
+    }
+}
+
 function muestraErrores($error)
 {
     foreach ($error as $err): ?>
@@ -18,6 +25,7 @@ function compruebaParametros($par, &$error)
             return array_map('trim', $_GET);
         } else {
             $error[] = "Los parámetros recibidos no son los correctos.";
+            throw new Exception();
         }
     }
     return $par;
@@ -33,6 +41,8 @@ function compruebaValores($op1, $op2, $op, $ops, &$error)
     if (!in_array($op, $ops)) {
         $error[] = "El operador no es válido.";
     }
+    compruebaErrores($error);
+
 }
 function selected($op1, $op2)
 {
